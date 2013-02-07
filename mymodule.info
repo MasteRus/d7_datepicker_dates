@@ -1,0 +1,5 @@
+name = mymodule
+description = Supports configurable tables in places.
+core = 7.x
+version = "7.x-0.1"
+project = "mymodule"

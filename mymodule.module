@@ -1,0 +1,47 @@
+<?php
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+function mymodule_menu() {
+  $items = array();
+
+  $items['mymodule/dateexample'] = array(
+      'title' => 'Simple calc',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('mymodule_dateexample'),
+      'access callback' => true,
+  );
+  return $items;
+}
+
+function mymodule_dateexample($form, &$form_state)
+{
+  $dateformat='Y-m-d';
+  $datef=date($dateformat);
+  $settings['my_vars']=array(
+    'drupal_var1' => 'Test1',
+    'drupal_var2' => 'Test2',
+  );
+  drupal_add_js(array ('mymodule'=>$settings),'setting');
+  drupal_add_js(drupal_get_path('module','mymodule').'/mymodule.js');
+  
+  
+  $form['choose_date'] = array(
+      '#title' => t('Enabled on'),
+      '#type' => 'date_popup',
+      '#default_value' => $datef,
+      '#date_format' => $dateformat,
+      //'#date_timezone' => 'Asia/Novosibirsk',
+      //'#date_increment' => 1,
+      //'#date_year_range' => '0:+1',
+      //'#attributes' => array('class' => 'date-dropdown'),
+
+  );
+  dpm($form);
+  return $form;
+}
+
+
+?>
